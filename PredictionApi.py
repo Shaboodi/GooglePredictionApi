@@ -55,15 +55,12 @@ def status():
     execute = service.trainedmodels().get(project="prediction-166711", id=modelName).execute()
     return Response(json.dumps(execute), mimetype='application/json')
 
-
 @app.route('/predict')
 def predict():
     modelName = request.args.get('modelName')
     csvInstance = request.args.get('csvInstance')
-    execute = service.trainedmodels().predict(project="prediction-166711", id=modelName,
-                                              body={"input": {"csvInstance": [csvInstance]}}).execute()
+    execute = service.trainedmodels().predict(project="prediction-166711", id=modelName, body={"input": {"csvInstance" : [csvInstance]}}).execute()
     return Response(json.dumps(execute), mimetype='application/json')
-
 
 if __name__ == '__main__':
     app.run()
